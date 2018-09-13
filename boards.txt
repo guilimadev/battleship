@@ -1,0 +1,41 @@
+Battleship: 2 5 1
+Cruiser: 9 8 1
+Cruiser: 4 3 1
+Destroyer: 8 4 1
+Destroyer: 1 2 1
+Destroyer: 8 0 2
+
+|A||B||C||D||E||F||G||H||I||J|
+ x  x  x  x  x  x  x  x  x  x |1| = 0
+ x  x  <  >  x  x  x  x  x  x |2| = 2
+ x  x  x  x  x  <  o  o  >  x |3| = 4
+ x  x  x  x  x  x  x  x  x  x |4| = 0
+ x  x  <  o  >  x  x  x  x  x |5| = 3
+ x  x  x  x  x  x  x  x  x  x |6| = 0
+ x  x  x  x  x  x  x  x  x  x |7| = 0
+ x  x  x  x  x  x  x  x  x  x |8| = 0
+ ^  x  x  x  <  >  x  x  x  x |9| = 3
+ v  x  x  x  x  x  x  <  o  > |10| = 4
+
+Battleship: 0 1 1
+Cruiser: 2 8 1
+Cruiser: 8 1 1
+Destroyer: 8 4 2
+Destroyer: 4 6 1
+Destroyer: 2 0 2
+
+|A||B||C||D||E||F||G||H||I||J|
+ x  <  o  o  >  x  x  x  x  x |1| = 4
+ x  x  x  x  x  x  x  x  x  x |2| = 0
+ ^  x  x  x  x  x  x  <  o  > |3| = 4
+ v  x  x  x  x  x  x  x  x  x |4| = 1
+ x  x  x  x  x  x  <  >  x  x |5| = 2
+ x  x  x  x  x  x  x  x  x  x |6| = 0
+ x  x  x  x  x  x  x  x  x  x |7| = 0
+ x  x  x  x  x  x  x  x  x  x |8| = 0
+ <  o  >  x  ^  x  x  x  x  x |9| = 4
+ x  x  x  x  v  x  x  x  x  x |10| = 1
+
+Battleship: 0 3 2
+Cruiser: 6 2 2
+Cruiser: 7 8 2

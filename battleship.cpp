@@ -23,7 +23,7 @@ int main(void){
 
 	std::ifstream myfile("databattleship.txt");
 	std::ofstream mydata;
-	mydata.open("test.txt", std::ios::ate);
+	mydata.open("boards.txt", std::ios::ate);
 
 	std::getline(myfile, line);
 	std::getline(myfile, col);
@@ -59,13 +59,14 @@ int main(void){
 
 
 		
-		int A[n_lines+1][n_cols+1];
+		std::string A[n_lines+1][n_cols+1];
+
 		for (int i = 0; i < n_lines+1; ++i)
 		{
 			for (int j = 0; j < n_cols+1; ++j)
 			{
 				
-				A[i][j] = 0;
+				A[i][j] = "x";
 				
 			}
 		}
@@ -82,17 +83,21 @@ int main(void){
 
 			std::cout << rand_line << " " << rand_col << " " << rand_pos <<" - Battleship";
 
+			//1 = Horizontal, 2 = Vertical
+
 			if(rand_pos == 1){
 				if(rand_col+3 >= n_cols){
 					i--;
 					std::cout << " entrada invalida" << "\n";
 				}
 				else{
-					A[rand_line][rand_col+3] = 4;
-					A[rand_line][rand_col+2] = 4; 
-					A[rand_line][rand_col+1] = 4; 
-					A[rand_line][rand_col] = 4;
+					A[rand_line][rand_col+3] = ">";
+					A[rand_line][rand_col+2] = "o"; 
+					A[rand_line][rand_col+1] = "o"; 
+					A[rand_line][rand_col] = "<";
 					std::cout << "\n";
+					mydata << "Battleship: " << rand_line << " " << rand_col << " " << rand_pos << "\n";
+					
 				}
 			}
 
@@ -102,10 +107,10 @@ int main(void){
 					std::cout << " entrada invalida" << "\n";;
 				}
 				else{
-					A[rand_line+3][rand_col] = 4;
-					A[rand_line+2][rand_col] = 4; 
-					A[rand_line+1][rand_col] = 4; 
-					A[rand_line][rand_col] = 4;
+					A[rand_line+3][rand_col] = "v";
+					A[rand_line+2][rand_col] = "o"; 
+					A[rand_line+1][rand_col] = "o"; 
+					A[rand_line][rand_col] = "^";
 					std::cout << "\n";
 
 					mydata << "Battleship: " << rand_line << " " << rand_col << " " << rand_pos << "\n";
@@ -116,7 +121,7 @@ int main(void){
 		}
 
 		// Implementando 2 Cruisers (tamanho 3)
-
+		
 		for (int i = 0; i < 2; ++i)
 		{
 			rand_line = rand() % n_lines;
@@ -126,20 +131,20 @@ int main(void){
 			std::cout << rand_line << " " << rand_col << " " << rand_pos << " - Cruiser";
 
 			if(rand_pos == 1){
-				if(A[rand_line][rand_col] != 0 or A[rand_line-1][rand_col] != 0 or A[rand_line+1][rand_col] != 0  or A[rand_line-1][rand_col-1] != 0 or A[rand_line+1][rand_col-1] != 0 
-					or A[rand_line-1][rand_col-2] != 0 or A[rand_line][rand_col-2] != 0 or A[rand_line+1][rand_col-2] != 0 or A[rand_line-1][rand_col+1] != 0
-					or A[rand_line+1][rand_col+1] != 0  or A[rand_line-1][rand_col+2] != 0 or A[rand_line][rand_col+2] != 0 or A[rand_line+1][rand_col+2] != 0 ){
+				if(A[rand_line][rand_col] != "x" or A[rand_line-1][rand_col] != "x" or A[rand_line+1][rand_col] != "x"  or A[rand_line-1][rand_col-1] != "x" or A[rand_line+1][rand_col-1] != "x" 
+					or A[rand_line-1][rand_col-2] != "x" or A[rand_line][rand_col-2] != "x" or A[rand_line+1][rand_col-2] != "x" or A[rand_line-1][rand_col+1] != "x"
+					or A[rand_line+1][rand_col+1] != "x"  or A[rand_line-1][rand_col+2] != "x" or A[rand_line][rand_col+2] != "x" or A[rand_line+1][rand_col+2] != "x" ){
 					i--;	
 					std::cout << " entrada invalida" << std::endl;	
 				}
-				else if(A[rand_line][rand_col+1] != 0 or A[rand_line][rand_col-1] != 0 or rand_col-1 < 0 or rand_col+1 >= n_cols){
+				else if(A[rand_line][rand_col+1] != "x" or A[rand_line][rand_col-1] != "x" or rand_col-1 < 0 or rand_col+1 >= n_cols){
 					i--;	
 					std::cout << " entrada invalida" << std::endl;	
 				}
 				else{
-					A[rand_line][rand_col] = 3;
-					A[rand_line][rand_col-1] = 3;
-					A[rand_line][rand_col+1] = 3;
+					A[rand_line][rand_col] = "o";
+					A[rand_line][rand_col-1] = "<";
+					A[rand_line][rand_col+1] = ">";
 					std::cout << std::endl;
 					mydata << "Cruiser: " << rand_line << " " << rand_col << " " << rand_pos << std::endl;
 				
@@ -147,20 +152,20 @@ int main(void){
 			}
 			if (rand_pos == 2)
 			{
-				if(A[rand_line][rand_col] != 0 or A[rand_line][rand_col-1] != 0 or A[rand_line][rand_col+1] != 0  or A[rand_line-1][rand_col-1] != 0 or A[rand_line-1][rand_col+1] != 0 
-					or A[rand_line-2][rand_col-1] != 0 or A[rand_line-2][rand_col] != 0 or A[rand_line-2][rand_col+1] != 0 or A[rand_line+1][rand_col-1] != 0
-					or A[rand_line+1][rand_col+1] != 0  or A[rand_line+2][rand_col-1] != 0 or A[rand_line+2][rand_col] != 0 or A[rand_line+2][rand_col+1] != 0 ){
+				if(A[rand_line][rand_col] != "x" or A[rand_line][rand_col-1] != "x" or A[rand_line][rand_col+1] != "x"  or A[rand_line-1][rand_col-1] != "x" or A[rand_line-1][rand_col+1] != "x" 
+					or A[rand_line-2][rand_col-1] != "x" or A[rand_line-2][rand_col] != "x" or A[rand_line-2][rand_col+1] != "x" or A[rand_line+1][rand_col-1] != "x"
+					or A[rand_line+1][rand_col+1] != "x"  or A[rand_line+2][rand_col-1] != "x" or A[rand_line+2][rand_col] != "x" or A[rand_line+2][rand_col+1] != "x" ){
 					i--;	
 					std::cout << " entrada invalida" << std::endl;	
 				}
-				else if(A[rand_line+1][rand_col] != 0 or A[rand_line-1][rand_col] != 0 or rand_line-1 < 0 or rand_line+1 >= n_lines){
+				else if(A[rand_line+1][rand_col] != "x" or A[rand_line-1][rand_col] != "x" or rand_line-1 < 0 or rand_line+1 >= n_lines){
 					i--;	
 					std::cout << " entrada invalida" << std::endl;	
 				}
 				else{
-					A[rand_line][rand_col] = 3;
-					A[rand_line-1][rand_col] = 3;
-					A[rand_line+1][rand_col] = 3;
+					A[rand_line][rand_col] = "o";
+					A[rand_line-1][rand_col] = "^";
+					A[rand_line+1][rand_col] = "v";
 					mydata << "Cruiser: " << rand_line << " " << rand_col << " " << rand_pos << std::endl;
 				
 					std::cout << std::endl;
@@ -169,7 +174,7 @@ int main(void){
 		}
 
 
-
+		
 		// Implementando 3 Destroyers (tamanho 2)
 
 		for (int i = 0; i < 3; ++i)
@@ -183,10 +188,10 @@ int main(void){
 			if(rand_pos == 2){
 
 
-				if(A[rand_line][rand_col] != 0 or A[rand_line+1][rand_col] != 0 or A[rand_line-1][rand_col] != 0 or A[rand_line][rand_col+1] != 0 
-				   or A[rand_line+1][rand_col+1] != 0 or A[rand_line-1][rand_col+1] != 0 or A[rand_line-1][rand_col+1] != 0
-				   or A[rand_line-1][rand_col-1] != 0 or A[rand_line][rand_col-1] != 0 or A[rand_line+1][rand_col-1] != 0
-				   or A[rand_line+2][rand_col-1] != 0 or A[rand_line+2][rand_col] != 0 or A[rand_line+2][rand_col+1] != 0
+				if(A[rand_line][rand_col] != "x" or A[rand_line+1][rand_col] != "x" or A[rand_line-1][rand_col] != "x" or A[rand_line][rand_col+1] != "x" 
+				   or A[rand_line+1][rand_col+1] != "x" or A[rand_line-1][rand_col+1] != "x" or A[rand_line-1][rand_col+1] != "x"
+				   or A[rand_line-1][rand_col-1] != "x" or A[rand_line][rand_col-1] != "x" or A[rand_line+1][rand_col-1] != "x"
+				   or A[rand_line+2][rand_col-1] != "x" or A[rand_line+2][rand_col] != "x" or A[rand_line+2][rand_col+1] != "x"
 					){
 					i--;	
 					std::cout << " entrada invalida" << std::endl;		
@@ -194,15 +199,19 @@ int main(void){
 				else 
 				{
 
-					A[rand_line][rand_col] = 2;
+					
 
 					if(rand_line + 1 >= n_lines){
-						A[rand_line-1][rand_col] = 2;
+						A[rand_line-1][rand_col] = "^";
+						A[rand_line][rand_col] = "v";
 					}
 					else{
-						A[rand_line+1][rand_col] = 2;
+						A[rand_line+1][rand_col] = "v";
+						A[rand_line][rand_col] = "^";
 					}	
 						std::cout << std::endl;
+					mydata << "Destroyer: " << rand_line << " " << rand_col << " " << rand_pos << "\n";
+					
 				}
 			}
 			if(rand_pos == 1){
@@ -211,10 +220,10 @@ int main(void){
 					std::cout << " entrada invalida" << std::endl;	
 				}
 				else{
-				if(A[rand_line][rand_col] != 0 or A[rand_line+1][rand_col] != 0 or A[rand_line][rand_col-1] != 0 or A[rand_line+1][rand_col] != 0 
-				   or A[rand_line+1][rand_col+1] != 0 or A[rand_line+1][rand_col-1] != 0 or A[rand_line+1][rand_col-1] != 0
-				   or A[rand_line-1][rand_col-1] != 0 or A[rand_line-1][rand_col] != 0 or A[rand_line-1][rand_col+1] != 0
-				   or A[rand_line-1][rand_col+2] != 0 or A[rand_line][rand_col+2] != 0 or A[rand_line+1][rand_col+2] != 0
+				if(A[rand_line][rand_col] != "x" or A[rand_line+1][rand_col] != "x" or A[rand_line][rand_col-1] != "x" or A[rand_line+1][rand_col] != "x" 
+				   or A[rand_line+1][rand_col+1] != "x" or A[rand_line+1][rand_col-1] != "x" or A[rand_line+1][rand_col-1] != "x"
+				   or A[rand_line-1][rand_col-1] != "x" or A[rand_line-1][rand_col] != "x" or A[rand_line-1][rand_col+1] != "x"
+				   or A[rand_line-1][rand_col+2] != "x" or A[rand_line][rand_col+2] != "x" or A[rand_line+1][rand_col+2] != "x"
 				   ){
 					i--;	
 					std::cout << " entrada invalida" << std::endl;		
@@ -222,15 +231,19 @@ int main(void){
 				else 
 					{
 
-						A[rand_line][rand_col] = 2;
+						
 
 						if(rand_line + 1 >= n_lines){
-							A[rand_line][rand_col-1] = 2;
+							A[rand_line][rand_col-1] = "<";
+							A[rand_line][rand_col] = ">";
 						}
 						else{
-							A[rand_line][rand_col+1] = 2;
+							A[rand_line][rand_col+1] = ">";
+							A[rand_line][rand_col] = "<";
 						}	
 							std::cout << std::endl;
+							mydata << "Destroyer: " << rand_line << " " << rand_col << " " << rand_pos << "\n";
+					
 					}
 
 				}
@@ -239,7 +252,7 @@ int main(void){
 			
 		} 
 	 	
-		
+		/*
 		// Implementando 4 Submarines (tamanho 1)
 
 		int contSub = 0;
@@ -272,6 +285,8 @@ int main(void){
 				else{
 					A[rand_line][rand_col] = 1;
 					std::cout << std::endl;
+					mydata << "Submarine: " << rand_line << " " << rand_col  << "\n";
+					
 				}
 			}
 
@@ -288,6 +303,8 @@ int main(void){
 				else{
 					A[rand_line][rand_col] = 1;
 					std::cout << std::endl;
+					mydata << "Submarine: " << rand_line << " " << rand_col  << "\n";
+					
 				}
 			}
 
@@ -306,6 +323,8 @@ int main(void){
 				else{
 					A[rand_line][rand_col] = 1;
 					std::cout << std::endl;
+					mydata << "Submarine: " << rand_line << " " << rand_col  << "\n";
+					
 				}
 			}
 			
@@ -322,6 +341,8 @@ int main(void){
 				else{
 					A[rand_line][rand_col] = 1;
 					std::cout << std::endl;
+					mydata << "Submarine: " << rand_line << " " << rand_col  << "\n";
+					
 				}
 			}
 
@@ -340,6 +361,8 @@ int main(void){
 				else{
 					A[rand_line][rand_col] = 1;
 					std::cout << std::endl;
+					mydata << "Submarine: " << rand_line << " " << rand_col  << "\n";
+					
 				}
 
 				
@@ -359,34 +382,53 @@ int main(void){
 				else{
 					A[rand_line][rand_col] = 1;
 					std::cout << std::endl;
+					mydata << "Submarine: " << rand_line << " " << rand_col  << "\n";
+					
 				}
 			}
 		}
+		*/
+		mydata << "\n";
+					
 
 		std::cout << std::endl;
+
+
+		// Piece of code that prints the board
 		
 		for(int c = 0; c < n_cols; c++){
 			std::cout << "|" << Col[c] << "|";
+			mydata  << "|" << Col[c] << "|";
 		}
 		std::cout << std::endl;
+		mydata << "\n";
 		int contLine = 0;
 		
+
+
 		for (int i = 0; i < n_lines; ++i)
 			{
 
 				for (int j = 0; j < n_cols; ++j)
 				{
-					if(A[i][j] != 0){
+					if(A[i][j] != "x"){
 						contLine++;
 					}
+					// Prints the elements of the board
 					std::cout << " " << A[i][j] << " ";
+					mydata << " " << A[i][j] << " ";
 				}
+
+				//Prints the number of the line and the amount os pieces of ship on that line
 				std::cout << "|" << i + 1  << "| = " << contLine <<std::endl;
+				mydata << "|" << i + 1  << "| = " << contLine << "\n";
 				contLine = 0;
 			}
 
 			std::cout << std::endl;
+			mydata << "\n";
 		}
+		mydata << "\n" << "\n";
 
 
 	mydata.close();
