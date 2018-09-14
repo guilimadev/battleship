@@ -49,6 +49,8 @@ int main(void){
 	int rand_col;
 	int rand_pos;
 
+	std::string basic = "x";
+
 
 	
 	//Number of puzzles
@@ -131,16 +133,17 @@ int main(void){
 			std::cout << rand_line << " " << rand_col << " " << rand_pos << " - Cruiser";
 
 			if(rand_pos == 1){
-				if(A[rand_line][rand_col] != "x" or A[rand_line-1][rand_col] != "x" or A[rand_line+1][rand_col] != "x"  or A[rand_line-1][rand_col-1] != "x" or A[rand_line+1][rand_col-1] != "x" 
-					or A[rand_line-1][rand_col-2] != "x" or A[rand_line][rand_col-2] != "x" or A[rand_line+1][rand_col-2] != "x" or A[rand_line-1][rand_col+1] != "x"
-					or A[rand_line+1][rand_col+1] != "x"  or A[rand_line-1][rand_col+2] != "x" or A[rand_line][rand_col+2] != "x" or A[rand_line+1][rand_col+2] != "x" ){
+				if(A[rand_line][rand_col+1] != basic or A[rand_line][rand_col-1] != basic or rand_col-1 < 0 or rand_col+1 >= n_cols){
 					i--;	
 					std::cout << " entrada invalida" << std::endl;	
 				}
-				else if(A[rand_line][rand_col+1] != "x" or A[rand_line][rand_col-1] != "x" or rand_col-1 < 0 or rand_col+1 >= n_cols){
+				else if(A[rand_line][rand_col] != basic or A[rand_line-1][rand_col] != basic or A[rand_line+1][rand_col] != basic  or A[rand_line-1][rand_col-1] != basic or A[rand_line+1][rand_col-1] != basic 
+					or A[rand_line-1][rand_col-2] != basic or A[rand_line][rand_col-2] != basic or A[rand_line+1][rand_col-2] != basic or A[rand_line-1][rand_col+1] != basic
+					or A[rand_line+1][rand_col+1] != basic  or A[rand_line-1][rand_col+2] != basic or A[rand_line][rand_col+2] != basic or A[rand_line+1][rand_col+2] != basic ){
 					i--;	
 					std::cout << " entrada invalida" << std::endl;	
 				}
+				
 				else{
 					A[rand_line][rand_col] = "o";
 					A[rand_line][rand_col-1] = "<";
@@ -152,16 +155,18 @@ int main(void){
 			}
 			if (rand_pos == 2)
 			{
-				if(A[rand_line][rand_col] != "x" or A[rand_line][rand_col-1] != "x" or A[rand_line][rand_col+1] != "x"  or A[rand_line-1][rand_col-1] != "x" or A[rand_line-1][rand_col+1] != "x" 
-					or A[rand_line-2][rand_col-1] != "x" or A[rand_line-2][rand_col] != "x" or A[rand_line-2][rand_col+1] != "x" or A[rand_line+1][rand_col-1] != "x"
-					or A[rand_line+1][rand_col+1] != "x"  or A[rand_line+2][rand_col-1] != "x" or A[rand_line+2][rand_col] != "x" or A[rand_line+2][rand_col+1] != "x" ){
+				if(A[rand_line+1][rand_col] != basic or A[rand_line-1][rand_col] != basic or rand_line-1 < 0 or rand_line+1 >= n_lines){
 					i--;	
 					std::cout << " entrada invalida" << std::endl;	
 				}
-				else if(A[rand_line+1][rand_col] != "x" or A[rand_line-1][rand_col] != "x" or rand_line-1 < 0 or rand_line+1 >= n_lines){
+
+				 else if(A[rand_line][rand_col] != basic or A[rand_line][rand_col-1] != basic or A[rand_line][rand_col+1] != basic  or A[rand_line-1][rand_col-1] != basic or A[rand_line-1][rand_col+1] != basic 
+					or A[rand_line-2][rand_col-1] != basic or A[rand_line-2][rand_col] != basic or A[rand_line-2][rand_col+1] != basic or A[rand_line+1][rand_col-1] != basic
+					or A[rand_line+1][rand_col+1] != basic  or A[rand_line+2][rand_col-1] != basic or A[rand_line+2][rand_col] != basic or A[rand_line+2][rand_col+1] != basic ){
 					i--;	
 					std::cout << " entrada invalida" << std::endl;	
 				}
+				
 				else{
 					A[rand_line][rand_col] = "o";
 					A[rand_line-1][rand_col] = "^";
@@ -188,10 +193,10 @@ int main(void){
 			if(rand_pos == 2){
 
 
-				if(A[rand_line][rand_col] != "x" or A[rand_line+1][rand_col] != "x" or A[rand_line-1][rand_col] != "x" or A[rand_line][rand_col+1] != "x" 
-				   or A[rand_line+1][rand_col+1] != "x" or A[rand_line-1][rand_col+1] != "x" or A[rand_line-1][rand_col+1] != "x"
-				   or A[rand_line-1][rand_col-1] != "x" or A[rand_line][rand_col-1] != "x" or A[rand_line+1][rand_col-1] != "x"
-				   or A[rand_line+2][rand_col-1] != "x" or A[rand_line+2][rand_col] != "x" or A[rand_line+2][rand_col+1] != "x"
+				if(A[rand_line][rand_col] != basic or A[rand_line+1][rand_col] != basic or A[rand_line-1][rand_col] != basic or A[rand_line][rand_col+1] != basic 
+				   or A[rand_line+1][rand_col+1] != basic or A[rand_line-1][rand_col+1] != basic or A[rand_line-1][rand_col+1] != basic
+				   or A[rand_line-1][rand_col-1] != basic or A[rand_line][rand_col-1] != basic or A[rand_line+1][rand_col-1] != basic
+				   or A[rand_line+2][rand_col-1] != basic or A[rand_line+2][rand_col] != basic or A[rand_line+2][rand_col+1] != basic
 					){
 					i--;	
 					std::cout << " entrada invalida" << std::endl;		
@@ -220,10 +225,10 @@ int main(void){
 					std::cout << " entrada invalida" << std::endl;	
 				}
 				else{
-				if(A[rand_line][rand_col] != "x" or A[rand_line+1][rand_col] != "x" or A[rand_line][rand_col-1] != "x" or A[rand_line+1][rand_col] != "x" 
-				   or A[rand_line+1][rand_col+1] != "x" or A[rand_line+1][rand_col-1] != "x" or A[rand_line+1][rand_col-1] != "x"
-				   or A[rand_line-1][rand_col-1] != "x" or A[rand_line-1][rand_col] != "x" or A[rand_line-1][rand_col+1] != "x"
-				   or A[rand_line-1][rand_col+2] != "x" or A[rand_line][rand_col+2] != "x" or A[rand_line+1][rand_col+2] != "x"
+				if(A[rand_line][rand_col] != basic or A[rand_line+1][rand_col] != basic or A[rand_line][rand_col-1] != basic or A[rand_line+1][rand_col] != basic 
+				   or A[rand_line+1][rand_col+1] != basic or A[rand_line+1][rand_col-1] != basic or A[rand_line+1][rand_col-1] != basic
+				   or A[rand_line-1][rand_col-1] != basic or A[rand_line-1][rand_col] != basic or A[rand_line-1][rand_col+1] != basic
+				   or A[rand_line-1][rand_col+2] != basic or A[rand_line][rand_col+2] != basic or A[rand_line+1][rand_col+2] != basic
 				   ){
 					i--;	
 					std::cout << " entrada invalida" << std::endl;		
@@ -252,7 +257,7 @@ int main(void){
 			
 		} 
 	 	
-		/*
+	
 		// Implementando 4 Submarines (tamanho 1)
 
 		int contSub = 0;
@@ -274,8 +279,8 @@ int main(void){
 
 			// Canto inferior Esquerdo
 			if(rand_col == 0 and rand_line+1 == n_lines){
-				if(A[rand_line][rand_col] != 0  or A[rand_line-1][rand_col] != 0 or 
-				 A[rand_line][rand_col+1] != 0  or A[rand_line][rand_col+1] != 0 or A[rand_line-1][rand_col+1] != 0)
+				if(A[rand_line][rand_col] != basic  or A[rand_line-1][rand_col] != basic or 
+				 A[rand_line][rand_col+1] != basic  or A[rand_line][rand_col+1] != basic or A[rand_line-1][rand_col+1] != basic)
 				{
 					
 					i--;	
@@ -283,7 +288,7 @@ int main(void){
 					contSub++;
 				}
 				else{
-					A[rand_line][rand_col] = 1;
+					A[rand_line][rand_col] = "S";
 					std::cout << std::endl;
 					mydata << "Submarine: " << rand_line << " " << rand_col  << "\n";
 					
@@ -292,8 +297,8 @@ int main(void){
 
 			//Lado superior esquerdo
 			else if(rand_col == 0 and rand_line == 0){
-				if(A[rand_line][rand_col] != 0 or A[rand_line+1][rand_col] != 0	or A[rand_line][rand_col+1] != 0  or A[rand_line][rand_col+1] != 0 or
-				 A[rand_line+1][rand_col+1] != 0 )
+				if(A[rand_line][rand_col] != basic or A[rand_line+1][rand_col] != basic	or A[rand_line][rand_col+1] != basic  or A[rand_line][rand_col+1] != basic or
+				 A[rand_line+1][rand_col+1] != basic )
 				{
 					
 					i--;	
@@ -301,7 +306,7 @@ int main(void){
 					contSub++;
 				}
 				else{
-					A[rand_line][rand_col] = 1;
+					A[rand_line][rand_col] = "S";
 					std::cout << std::endl;
 					mydata << "Submarine: " << rand_line << " " << rand_col  << "\n";
 					
@@ -312,8 +317,8 @@ int main(void){
 			// Lado esquerdo 
 			else if(rand_col == 0 and rand_line > 0 and rand_line+1 < n_lines){
 
-				if(A[rand_line][rand_col] != 0 or A[rand_line+1][rand_col] != 0 or A[rand_line-1][rand_col] != 0 or
-				 A[rand_line][rand_col+1] != 0  or A[rand_line][rand_col+1] != 0	or A[rand_line+1][rand_col+1] != 0 or A[rand_line-1][rand_col+1] != 0)
+				if(A[rand_line][rand_col] != basic or A[rand_line+1][rand_col] != basic or A[rand_line-1][rand_col] != basic or
+				 A[rand_line][rand_col+1] != basic  or A[rand_line][rand_col+1] != basic	or A[rand_line+1][rand_col+1] != basic or A[rand_line-1][rand_col+1] != basic)
 				{
 					
 					i--;	
@@ -321,7 +326,7 @@ int main(void){
 					contSub++;
 				}
 				else{
-					A[rand_line][rand_col] = 1;
+					A[rand_line][rand_col] = "S";
 					std::cout << std::endl;
 					mydata << "Submarine: " << rand_line << " " << rand_col  << "\n";
 					
@@ -330,8 +335,8 @@ int main(void){
 			
 			// Canto inferior direito
 			else if(rand_col+1 == n_cols and rand_line+1 == n_lines){
-				if(A[rand_line][rand_col] != 0  or A[rand_line-1][rand_col] != 0 or A[rand_line][rand_col-1] != 0
-				 or A[rand_line-1][rand_col-1] != 0 )
+				if(A[rand_line][rand_col] != basic  or A[rand_line-1][rand_col] != basic or A[rand_line][rand_col-1] != basic
+				 or A[rand_line-1][rand_col-1] != basic )
 				{
 					
 					i--;	
@@ -339,7 +344,7 @@ int main(void){
 					contSub++;
 				}
 				else{
-					A[rand_line][rand_col] = 1;
+					A[rand_line][rand_col] = "S";
 					std::cout << std::endl;
 					mydata << "Submarine: " << rand_line << " " << rand_col  << "\n";
 					
@@ -349,9 +354,9 @@ int main(void){
 			//Borda superior
 			else if(rand_line == 0){
 
-				if(A[rand_line][rand_col] != 0 or A[rand_line+1][rand_col] != 0  or A[rand_line][rand_col-1] != 0
-				or A[rand_line][rand_col+1] != 0  or A[rand_line][rand_col+1] != 0 or A[rand_line +1][rand_col-1] != 0
-				or A[rand_line+1][rand_col+1] != 0 )
+				if(A[rand_line][rand_col] != basic or A[rand_line+1][rand_col] != basic  or A[rand_line][rand_col-1] != basic
+				or A[rand_line][rand_col+1] != basic  or A[rand_line][rand_col+1] != basic or A[rand_line +1][rand_col-1] != basic
+				or A[rand_line+1][rand_col+1] != basic )
 					{
 					
 					i--;	
@@ -359,7 +364,7 @@ int main(void){
 					contSub++;
 				}
 				else{
-					A[rand_line][rand_col] = 1;
+					A[rand_line][rand_col] = "S";
 					std::cout << std::endl;
 					mydata << "Submarine: " << rand_line << " " << rand_col  << "\n";
 					
@@ -370,9 +375,9 @@ int main(void){
 			}
 
 			else{
-				if(A[rand_line][rand_col] != 0 or A[rand_line+1][rand_col] != 0 or A[rand_line-1][rand_col] != 0 or A[rand_line][rand_col-1] != 0
-				or A[rand_line][rand_col+1] != 0 or A[rand_line-1][rand_col-1] != 0 or A[rand_line][rand_col+1] != 0 or A[rand_line +1][rand_col-1] != 0
-				or A[rand_line+1][rand_col+1] != 0 or A[rand_line-1][rand_col+1] != 0)
+				if(A[rand_line][rand_col] != basic or A[rand_line+1][rand_col] != basic or A[rand_line-1][rand_col] != basic or A[rand_line][rand_col-1] != basic
+				or A[rand_line][rand_col+1] != basic or A[rand_line-1][rand_col-1] != basic or A[rand_line][rand_col+1] != basic or A[rand_line +1][rand_col-1] != basic
+				or A[rand_line+1][rand_col+1] != basic or A[rand_line-1][rand_col+1] != basic)
 				{
 					
 					i--;	
@@ -380,14 +385,14 @@ int main(void){
 					contSub++;
 				}
 				else{
-					A[rand_line][rand_col] = 1;
+					A[rand_line][rand_col] = "S";
 					std::cout << std::endl;
 					mydata << "Submarine: " << rand_line << " " << rand_col  << "\n";
 					
 				}
 			}
 		}
-		*/
+		
 		mydata << "\n";
 					
 
@@ -411,7 +416,7 @@ int main(void){
 
 				for (int j = 0; j < n_cols; ++j)
 				{
-					if(A[i][j] != "x"){
+					if(A[i][j] != basic){
 						contLine++;
 					}
 					// Prints the elements of the board
