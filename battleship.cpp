@@ -18,11 +18,18 @@ int main(void){
 	std::string col;
 	std::string times;
 
+
+
 	std::string Col[25] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"
 	, "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z" };
 
+
+	//Reading the file that contains the information about the number of
+	// lines, coluns and amount of boards that will be generated
 	std::ifstream myfile("databattleship.txt");
 	std::ofstream mydata;
+
+	//Open exportation file
 	mydata.open("boards.txt", std::ios::ate);
 
 	std::getline(myfile, line);
@@ -34,6 +41,8 @@ int main(void){
 	auto n_times = std::stoi (times);
 	auto n_cols = std::stoi (col);
 	auto n_lines = std::stoi (line);
+
+	//Defining the limit of the board in 10 by 10 or more
 
 	if(n_cols < 10 or n_lines < 10){
 		std::cout << "Para gerar um tabuleiro valido para o jogo" << std::endl
@@ -53,13 +62,14 @@ int main(void){
 
 
 	
-	//Number of puzzles
+	//Number of puzzles requested for the user
 
 	for(int t = 0; t < n_times; t++){
 
 		std::cout << n_cols << " " << n_lines << "\n";
 
 
+		//Setting all the elements of the matrix = x, for better viewing and comparing during the code
 		
 		std::string A[n_lines+1][n_cols+1];
 
@@ -435,6 +445,12 @@ int main(void){
 		}
 		mydata << "\n" << "\n";
 
+	// Closing the exportation file
+
+	// !!IMPORTANT!!	
+	// NOTE: All the if and elses inside the generation of each ship is just checking
+	// the perimeter and if the position is valid for that ship and keep trying until reach a
+	// valid position
 
 	mydata.close();
 	return 0;
